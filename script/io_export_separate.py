@@ -38,6 +38,17 @@
  #      Séverin Lemaignan [severin.lemaignan@epfl.ch]
 
 import bpy
+import os
+import sys
+
+DEFAULT_PATH="./mesh/stl"
+
+path = sys.argv[-1].split('=')[1] if "--path=" in sys.argv[-1] else DEFAULT_PATH
+try:
+    os.makedirs(path)
+    print("Exporting meshes to <%s>." % path)
+except FileExistsError:
+    print("The export path for meshes <%s> already exists. Using it." % path)
 
 # Make sure all objects are visible
 for o in bpy.data.objects:
@@ -60,9 +71,8 @@ for ob in sel_obs:
     ob.select = True 
     
     # Export single object to STL 
-    bpy.ops.export_mesh.stl(filepath="toto" + ob.name + ".stl") 
+    filepath = os.path.join(path, ob.name + ".stl")
+    bpy.ops.export_mesh.stl(filepath=filepath) 
     
-# Restore user selection 
-for ob in sel_obs: 
-    ob.select = True 
-bpy.context.scene.objects.active = ob
+
+print("%s meshes exported." % len(sel_obs))
