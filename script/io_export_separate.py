@@ -76,3 +76,5 @@ for ob in sel_obs:
     
 
 print("%s meshes exported." % len(sel_obs))
+
+bpy.ops.wm.quit_blender()
