@@ -35,9 +35,13 @@
  # Authors: Davide Zanin [davidezanin@gmail.com]
  #	    Roberto Bortoletto [roberto.bortoletto@dei.unipd.it]
  # 	    Stefano Michieletto [stefano.michieletto@dei.unipd.it]
- #
+ #      Séverin Lemaignan [severin.lemaignan@epfl.ch]
 
-import bpy 
+import bpy
+
+# Make sure all objects are visible
+for o in bpy.data.objects:
+    o.hide = False
 
 # Keep a copy of user selection 
 bpy.ops.object.select_all(action="SELECT")
@@ -56,7 +60,7 @@ for ob in sel_obs:
     ob.select = True 
     
     # Export single object to STL 
-    bpy.ops.export_mesh.stl(filepath="~/nao_mesh/stl/" + ob.name + ".stl") 
+    bpy.ops.export_mesh.stl(filepath="toto" + ob.name + ".stl") 
     
 # Restore user selection 
 for ob in sel_obs: 
