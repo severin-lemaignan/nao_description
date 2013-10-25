@@ -41,7 +41,7 @@ import bpy
 import os
 import sys
 
-DEFAULT_PATH="./mesh/stl"
+DEFAULT_PATH="./meshes"
 
 path = sys.argv[-1].split('=')[1] if "--path=" in sys.argv[-1] else DEFAULT_PATH
 try:
@@ -70,9 +70,9 @@ for ob in sel_obs:
     # Select single object 
     ob.select = True 
     
-    # Export single object to STL 
-    filepath = os.path.join(path, ob.name + ".stl")
-    bpy.ops.export_mesh.stl(filepath=filepath) 
+    # Export single object to Collada
+    filepath = os.path.join(path, ob.name + ".dae")
+    bpy.context.scene.collada_export(filepath=filepath, selected = True)
     
 
 print("%s meshes exported." % len(sel_obs))
